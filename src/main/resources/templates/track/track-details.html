@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Информация о произведении</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+<div th:insert="fragments/header :: mainheader"></div>
+<div th:each="el : ${track}">
+    <h3>Подробнее про компьютеры: </h3>
+    <h3 th:text="${el.Track_Name}"></h3>
+    <p th:text="${el.Track_File}"></p>
+    <p th:text="${el.genre}"></p>
+    <p th:text="${el.label}"></p>
+    <p th:text="${el.producer}"></p>
+    <div>
+        <a th:href="'/track/' + ${el.id} + '/edit'" class="btn btn-outline-warning">Редактировать</a>
+        <form th:action="'/track/' + ${el.id} + '/remove'" method="post">
+            <button type="submit" class="btn btn-outline-danger">Удалить</button>
+        </form>
+    </div>
+</div>
+<div th:insert="fragments/footer :: mainfooter"></div>
+</body>
+</html>

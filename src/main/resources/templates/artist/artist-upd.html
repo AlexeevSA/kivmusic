@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="'Артист: ' + ${artist.Artist_Name}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+<div th:insert="fragments/header :: mainheader"></div>
+<div th:each="el:${artist}">
+    <form th:object="${artist}" method="post">
+        <input th:field="*{Artist_Name}" type="text" name="Artist_Name" placeholder="Введите исполнителя">
+        <div style="color: red " th:if="${#fields.hasErrors('Artist_Name')}" th:errors="*{Artist_Name}"></div>
+        <input th:field="*{Description}" type="text" name="Description" placeholder="Введите описание">
+        <div style="color: red " th:if="${#fields.hasErrors('Description')}" th:errors="*{gpu}"></div>
+        <input th:field="*{Avatar}" type="text" name="Avatar" placeholder="Добавить фотографию">
+        <div style="color: red " th:if="${#fields.hasErrors('Avatar')}" th:errors="*{Avatar}"></div>
+        <br>
+        <button type="submit" class="btn btn-outline-primary">Сохранить изменения</button>
+    </form>
+</div>
+<div th:insert="fragments/footer :: mainfooter"></div>
+</body>
+</html>

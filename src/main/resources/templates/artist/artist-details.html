@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Информация о артисте</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+<div th:insert="fragments/header :: mainheader"></div>
+<div th:each="el : ${artist}">
+    <h3>Подробнее про артиста: </h3>
+    <h3 th:text="${el.Artist_Name}"></h3>
+    <p th:text="${el.Description}"></p>
+    <p th:text="${el.Avatar}"></p>
+    <div>
+        <a th:href="'/artist/' + ${el.id} + '/edit'" class="btn btn-outline-warning">Редактировать</a>
+        <form th:action="'/artist/' + ${el.id} + '/remove'" method="post">
+            <button type="submit" class="btn btn-outline-danger">Удалить</button>
+        </form>
+    </div>
+</div>
+<div th:insert="fragments/footer :: mainfooter"></div>
+</body>
+</html>
