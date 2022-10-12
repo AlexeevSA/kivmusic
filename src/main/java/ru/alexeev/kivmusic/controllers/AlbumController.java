@@ -1,17 +1,21 @@
 package ru.alexeev.kivmusic.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.alexeev.kivmusic.models.Album;
+import ru.alexeev.kivmusic.models.Artist;
+import ru.alexeev.kivmusic.models.Track;
 import ru.alexeev.kivmusic.repository.AlbumRepository;
+import ru.alexeev.kivmusic.repository.ArtistRepository;
+import ru.alexeev.kivmusic.repository.TrackRepository;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/album")
@@ -20,17 +24,39 @@ public class AlbumController {
     @Autowired
     private AlbumRepository albumRepository;
 
-    @GetMapping("/add")
-    public String addAlbum(Model model, Album album){
-        return "album-add";
+    @Autowired
+    private TrackRepository trackRepository;
+
+    @Autowired
+    private ArtistRepository artistRepository;
+
+    @GetMapping("/")
+    public String albumMain(Model model){
+        Iterable<Album> albums = albumRepository.findAll();
+        model.addAttribute("album", albums);
+        return "album/album-main";
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'AUTHOR')")
+    @GetMapping("/add")
+    public String addAlbum(Model model, Album album){
+        Iterable<Artist> artists = artistRepository.findAll();
+        model.addAttribute("artist", artists);
+
+        return "album/album-add";
+    }
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'AUTHOR')")
     @PostMapping("/add")
-    public String PostaddAlbum(@Valid Album album, BindingResult bindingResult, Model model){
+    public String PostaddAlbum(@Valid Album albums, BindingResult bindingResult, Model model,
+                               @RequestParam Long artist){
         if (bindingResult.hasErrors()){
-            return "album-add";
+            return "album/album-add";
         }
-        albumRepository.save(album);
+        Artist artists = artistRepository.findById(artist).orElseThrow();
+        List<Artist> listArtist = new ArrayList<>();
+        listArtist.add(artists);
+        albums.setArtists(listArtist);
+        albumRepository.save(albums);
         return "redirect:/";
     }
 
@@ -41,9 +67,10 @@ public class AlbumController {
         if (!albumRepository.existsById(id)){
             return "redirect:/";
         }
-        return "album-details";
+        return "album/album-details";
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'AUTHOR')")
     @GetMapping("/{id}/edit")
     public String albumEdit(@PathVariable(value = "id") long id, Model model, Album album){
         if (!albumRepository.existsById(id)){
@@ -51,18 +78,23 @@ public class AlbumController {
         }
         album = albumRepository.findById(id).orElseThrow();
         model.addAttribute("album", album);
-        return "album-upd";
+        model.addAttribute("artist", artistRepository.findAll());
+        return "album/album-upd";
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'AUTHOR')")
     @PostMapping("/{id}/edit")
     public String albumUpd(@PathVariable(value = "id") long id, Model model,
                            @Valid Album album, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
-            return "album-upd";
+            return "album/album-upd";
         }
+
+
         albumRepository.save(album);
         return "redirect:/";
     }
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'AUTHOR')")
     @PostMapping("/{id}/remove")
     public String albumDelete(@PathVariable(value = "id") long id, Model model){
         Album album = albumRepository.findById(id).orElseThrow();
@@ -70,5 +102,25 @@ public class AlbumController {
         return "redirect:/";
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'AUTHOR')")
+    @GetMapping("/con")
+    public String albumCon(Model model){
+        Iterable<Album> albums = albumRepository.findAll();
+        Iterable<Track> tracks = trackRepository.findAll();
+        model.addAttribute("albums", albums);
+        model.addAttribute("tracks", tracks);
+        return "album/album-con";
+    }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'AUTHOR')")
+    @PostMapping("/con")
+    public String albumConAdd(@RequestParam Long tracks, @RequestParam Long albums,
+            Model model){
+        Track track = trackRepository.findById(tracks).orElseThrow();
+        Album album = albumRepository.findById(albums).orElseThrow();
+        album.getTracks().add(track);
+        albumRepository.save(album);
+        return "redirect:/album/con";
+    }
 
 }

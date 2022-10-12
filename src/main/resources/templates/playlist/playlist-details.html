@@ -3,22 +3,32 @@
 <head>
     <title>Информация о плейлисте</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="" th:href="@{/css/style.css}" >
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
 <body>
 <div th:insert="fragments/header :: mainheader"></div>
-<div th:each="el : ${playlist}">
-    <h3>Подробнее про плейлист: </h3>
-    <h3 th:text="${el.Playlist_Name}"></h3>
-    <p th:text="${el.Photo}"></p>
-    <p th:text="${el.tracks}"></p>
-    <div>
-        <a th:href="'/playlist/' + ${el.id} + '/edit'" class="btn btn-outline-warning">Редактировать</a>
-        <form th:action="'/playlist/' + ${el.id} + '/remove'" method="post">
-            <button type="submit" class="btn btn-outline-danger">Удалить</button>
-        </form>
+<div class="div-panel">
+    <h1>Информация о плейлисте</h1>
+    <div th:each="el : ${playlist}">
+        <h3>Подробнее про плейлист: </h3>
+        <p>Название плейлиста</p>
+        <p class="myp" th:text="${el.playlistname}"></p>
+        <p>Фотография</p>
+        <p class="myp" th:text="${el.photo}"></p>
+        <p>Произведения</p>
+        <div th:each="tra : ${el.tracks}">
+            <p class="myp" th:text="${tra.trackname}"></p>
+        </div>
+        <div>
+            <a th:href="'/playlist/' + ${el.id} + '/edit'" class="btn btn-outline-warning mybtn">Редактировать</a>
+            <form th:action="'/playlist/' + ${el.id} + '/remove'" method="post">
+                <button type="submit" class="btn btn-outline-danger mybtn">Удалить</button>
+            </form>
+        </div>
     </div>
 </div>
+
 <div th:insert="fragments/footer :: mainfooter"></div>
 </body>
 </html>

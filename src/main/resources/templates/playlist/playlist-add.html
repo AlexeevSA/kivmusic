@@ -1,22 +1,28 @@
-<!DOCTYPE HTML>
+ <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Создание плейлиста</title>
+    <link rel="stylesheet" href="" th:href="@{/css/style.css}" >
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
 <body>
 <div th:insert="fragments/header :: mainheader"></div>
-<form th:object="${playlist}" th:action="${'/playlist/add'}" method="post">
-    <input th:field="*{Playlist_Name}" type="text" name="Playlist_Name" placeholder="Введите название плейлиста">
-    <div style="color: red " th:if="${#fields.hasErrors('Playlist_Name')}" th:errors="*{Playlist_Name}"></div>
-    <input th:field="*{Photo}" type="text" name="Photo" placeholder="Выберите фото">
-    <div style="color: red " th:if="${#fields.hasErrors('Photo')}" th:errors="*{Photo}"></div>
-    <input th:field="*{tracks}" type="text" name="tracks" placeholder="Введите произвдение">
-    <br>
-    <button type="submit" class="btn btn-outline-primary">Добавить</button>
-</form>
-<a href="/" class="btn btn-outline-secondary">Назад</a>
+
+<div class="div-panel">
+    <h1>Добавление плейлиста</h1>
+    <form th:object="${playlist}" th:action="${'/playlist/add'}" method="post">
+        <p>Введите название плейлиста</p>
+        <input class="form-control" th:field="*{playlistname}" type="text" name="playlistname" placeholder="Название плейлиста">
+        <div style="color: red " th:if="${#fields.hasErrors('playlistname')}" th:errors="*{playlistname}"></div>
+        <p>Выберите фотографию плейлиста</p>
+        <input class="form-control" th:field="*{photo}" type="file" name="photo" placeholder="Выберите фото">
+        <br>
+        <button type="submit" class="btn btn-outline-primary mybtn">Создать</button>
+    </form>
+    <a href="/" class="btn btn-outline-secondary mybtn">Назад</a>
+</div>
+
 <div th:insert="fragments/footer :: mainfooter"></div>
 </body>
 </html>

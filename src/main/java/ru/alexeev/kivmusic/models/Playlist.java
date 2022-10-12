@@ -13,9 +13,9 @@ public class Playlist {
     private Long id;
     @NotBlank(message = "Поле не должно быть пустым")
     @Size(min = 1, message = "Название должен быть больше 1 символа")
-    private String Playlist_Name;
+    private String playlistname;
     @NotNull(message = "Выберите файл")
-    private String  Photo;
+    private String  photo;
 
     @ManyToOne(optional = true, cascade = CascadeType.ALL)
     private Playlist playlist;
@@ -29,9 +29,9 @@ public class Playlist {
     public Playlist() {
     }
 
-    public Playlist(String playlist_Name, String photo, Playlist playlist, List<Track> tracks) {
-        Playlist_Name = playlist_Name;
-        Photo = photo;
+    public Playlist(String playlistname, String photo, Playlist playlist, List<Track> tracks) {
+        this.playlistname = playlistname;
+        this.photo = photo;
         this.playlist = playlist;
         this.tracks = tracks;
     }
@@ -44,20 +44,20 @@ public class Playlist {
         this.id = id;
     }
 
-    public String getPlaylist_Name() {
-        return Playlist_Name;
+    public String getPlaylistname() {
+        return playlistname;
     }
 
-    public void setPlaylist_Name(String playlist_Name) {
-        Playlist_Name = playlist_Name;
+    public void setPlaylistname(String playlistname) {
+        this.playlistname = playlistname;
     }
 
     public String getPhoto() {
-        return Photo;
+        return photo;
     }
 
     public void setPhoto(String photo) {
-        Photo = photo;
+        this.photo = photo;
     }
 
     public Playlist getPlaylist() {

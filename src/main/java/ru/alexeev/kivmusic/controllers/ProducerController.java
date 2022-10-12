@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.alexeev.kivmusic.models.Label;
 import ru.alexeev.kivmusic.models.Playlist;
 import ru.alexeev.kivmusic.models.Producer;
 import ru.alexeev.kivmusic.repository.PlaylistRepository;
@@ -21,15 +22,22 @@ public class ProducerController {
     @Autowired
     private ProducerRepository producerRepository;
 
+    @GetMapping("/")
+    public String producerMain(Model model){
+        Iterable<Producer> producers = producerRepository.findAll();
+        model.addAttribute("producer", producers);
+        return "producer/producer-main";
+    }
+
     @GetMapping("/add")
     public String addProducer(Model model, Producer producer){
-        return "producer-add";
+        return "producer/producer-add";
     }
 
     @PostMapping("/add")
     public String PostaddProducer(@Valid Producer producer, BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()){
-            return "producer-add";
+            return "producer/producer-add";
         }
         producerRepository.save(producer);
         return "redirect:/";
@@ -42,7 +50,7 @@ public class ProducerController {
         if (!producerRepository.existsById(id)){
             return "redirect:/";
         }
-        return "producer-details";
+        return "producer/producer-details";
     }
 
     @GetMapping("/{id}/edit")
@@ -52,14 +60,14 @@ public class ProducerController {
         }
         producer = producerRepository.findById(id).orElseThrow();
         model.addAttribute("producer", producer);
-        return "producer-upd";
+        return "producer/producer-upd";
     }
 
     @PostMapping("/{id}/edit")
     public String producerUpd(@PathVariable(value = "id") long id, Model model,
                               @Valid Producer producer, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
-            return "producer-upd";
+            return "producer/producer-upd";
         }
         producerRepository.save(producer);
         return "redirect:/";

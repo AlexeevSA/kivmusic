@@ -5,5 +5,5 @@ import ru.alexeev.kivmusic.models.Album;
 import ru.alexeev.kivmusic.models.Genre;
 
 public interface GenreRepository extends CrudRepository<Genre, Long> {
-    Genre findByGenre_Name(String Genre_Name);
+    Genre findByGenrename(String Genre_Name);
 }

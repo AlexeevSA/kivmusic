@@ -4,6 +4,8 @@ import org.springframework.data.repository.CrudRepository;
 import ru.alexeev.kivmusic.models.Album;
 import ru.alexeev.kivmusic.models.User;
 
+import java.util.List;
+
 public interface AlbumRepository extends CrudRepository<Album, Long> {
-    Album findByAlbum_Name(String Album_Name);
+    List<Album> findByAlbumname(String Album_Name);
 }

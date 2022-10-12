@@ -12,21 +12,21 @@ public class Label {
     private Long id;
     @NotBlank(message = "Поле не должно быть пустым")
     @Size(min = 1, message = "Название должен быть больше 1 символа")
-    private String Label_Name;
+    private String labelname;
     @NotBlank(message = "Поле не должно быть пустым")
     @Size(min = 1, message = "Название должен быть больше 1 символа")
-    private String Legal_Address;
+    private String legaladdress;
 
-    @OneToMany(mappedBy = "lable", fetch = FetchType.EAGER)
-    private Collection<Label> lables;
+    @OneToMany(mappedBy = "label", fetch = FetchType.EAGER)
+    private Collection<Track> tracks;
 
     public Label() {
     }
 
-    public Label(String label_Name, String legal_Address, Collection<Label> lables) {
-        Label_Name = label_Name;
-        Legal_Address = legal_Address;
-        this.lables = lables;
+    public Label(String labelname, String legaladdress, Collection<Track> tracks) {
+        this.labelname = labelname;
+        this.legaladdress = legaladdress;
+        this.tracks = tracks;
     }
 
     public Long getId() {
@@ -37,27 +37,27 @@ public class Label {
         this.id = id;
     }
 
-    public String getLabel_Name() {
-        return Label_Name;
+    public String getLabelname() {
+        return labelname;
     }
 
-    public void setLabel_Name(String label_Name) {
-        Label_Name = label_Name;
+    public void setLabelname(String labelname) {
+        this.labelname = labelname;
     }
 
-    public String getLegal_Address() {
-        return Legal_Address;
+    public String getLegaladdress() {
+        return legaladdress;
     }
 
-    public void setLegal_Address(String legal_Address) {
-        Legal_Address = legal_Address;
+    public void setLegaladdress(String legaladdress) {
+        this.legaladdress = legaladdress;
     }
 
-    public Collection<Label> getLables() {
-        return lables;
+    public Collection<Track> getTracks() {
+        return tracks;
     }
 
-    public void setLables(Collection<Label> lables) {
-        this.lables = lables;
+    public void setTracks(Collection<Track> tracks) {
+        this.tracks = tracks;
     }
 }

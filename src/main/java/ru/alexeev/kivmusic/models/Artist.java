@@ -13,12 +13,12 @@ public class Artist {
     private Long id;
     @NotBlank(message = "Поле не должно быть пустым")
     @Size(min = 1, message = "Название должен быть больше 1 символа")
-    private String Artist_Name;
+    private String artistname;
     @NotBlank(message = "Поле не должно быть пустым")
     @Size(min = 5, message = "Описание должен быть больше 5 символов")
-    private String Description;
+    private String description;
     @NotNull(message = "Выберите файл")
-    private String Avatar;
+    private String avatar;
 
     @ManyToMany
     @JoinTable (name="artist_album",
@@ -29,10 +29,10 @@ public class Artist {
     public Artist() {
     }
 
-    public Artist(String artist_Name, String description, String avatar, List<Album> albums) {
-        Artist_Name = artist_Name;
-        Description = description;
-        Avatar = avatar;
+    public Artist(String artistname, String description, String avatar, List<Album> albums) {
+        this.artistname = artistname;
+        this.description = description;
+        this.avatar = avatar;
         this.albums = albums;
     }
 
@@ -44,28 +44,28 @@ public class Artist {
         this.id = id;
     }
 
-    public String getArtist_Name() {
-        return Artist_Name;
+    public String getArtistname() {
+        return artistname;
     }
 
-    public void setArtist_Name(String artist_Name) {
-        Artist_Name = artist_Name;
+    public void setArtistname(String artistname) {
+        this.artistname = artistname;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     public String getAvatar() {
-        return Avatar;
+        return avatar;
     }
 
     public void setAvatar(String avatar) {
-        Avatar = avatar;
+        this.avatar = avatar;
     }
 
     public List<Album> getAlbums() {

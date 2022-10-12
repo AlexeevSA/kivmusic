@@ -14,9 +14,9 @@ public class Track {
     private Long id;
     @NotBlank(message = "Поле не должно быть пустым")
     @Size(min = 1, message = "Название должена быть больше 1 символа")
-    private String Track_Name;
+    private String trackname;
     @NotNull(message = "Выберите файл")
-    private String Track_File;
+    private String trackfile;
 
     @ManyToOne(optional = true, cascade = CascadeType.ALL)
     private Genre genre;
@@ -42,9 +42,9 @@ public class Track {
     public Track() {
     }
 
-    public Track(String track_Name, String track_File, Genre genre, Label label, Producer producer, List<Album> albums, List<Playlist> playlists) {
-        Track_Name = track_Name;
-        Track_File = track_File;
+    public Track(String trackname, String trackfile, Genre genre, Label label, Producer producer, List<Album> albums, List<Playlist> playlists) {
+        this.trackname = trackname;
+        this.trackfile = trackfile;
         this.genre = genre;
         this.label = label;
         this.producer = producer;
@@ -60,20 +60,20 @@ public class Track {
         this.id = id;
     }
 
-    public String getTrack_Name() {
-        return Track_Name;
+    public String getTrackname() {
+        return trackname;
     }
 
-    public void setTrack_Name(String track_Name) {
-        Track_Name = track_Name;
+    public void setTrackname(String trackname) {
+        this.trackname = trackname;
     }
 
-    public String getTrack_File() {
-        return Track_File;
+    public String getTrackfile() {
+        return trackfile;
     }
 
-    public void setTrack_File(String track_File) {
-        Track_File = track_File;
+    public void setTrackfile(String trackfile) {
+        this.trackfile = trackfile;
     }
 
     public Genre getGenre() {

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Альбом</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="" th:href="@{/css/style.css}" >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+<div th:insert="fragments/header :: mainheader"></div>
+
+<div class="div-panel">
+    <h1>Альбомы</h1>
+    <a class="btn btn-outline-primary mybtn" href="/album/add/">Добавить альбом</a>
+    <a class="btn btn-outline-primary mybtn" href="/album/con/">Связать альбом</a>
+
+    <h2>Все альбомы:</h2>
+    <div th:each="el : ${album}">
+        <h3>Подробнее: </h3>
+        <p>Название альбома:</p>
+        <p class="myp" th:text="${el.albumname}"></p>
+        <p>Дата выхода альбома:</p>
+        <p class="myp" th:text="${el.releasedate}"></p>
+<!--        <p>Фотография альбома:</p>-->
+<!--        <p class="myp" th:text="${el.photo}"></p>-->
+<!--        <p>Исполнитель альбома:</p>-->
+<!--        <p class="myp" th:text="${el.artists.get}"></p>-->
+        <a th:href="'/album/' + ${el.id}" class="btn btn-outline-secondary mybtn">Подробнее</a>
+    </div>
+</div>
+
+
+<div th:insert="fragments/footer :: mainfooter"></div>
+</body>
+</html>

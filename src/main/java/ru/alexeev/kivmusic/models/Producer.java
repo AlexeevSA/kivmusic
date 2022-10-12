@@ -13,27 +13,27 @@ public class Producer {
     private Long id;
     @NotBlank(message = "Поле не должно быть пустым")
     @Size(min = 1, message = "Фамилия должена быть больше 2 символов")
-    private String Last_Name;
+    private String lastname;
     @NotBlank(message = "Поле не должно быть пустым")
     @Size(min = 1, message = "Имя должено быть больше 2 символов")
-    private String First_Name;
+    private String firstname;
 
-    private String Middle_Name;
+    private String middlename;
     @NotNull(message = "Выберите файл")
-    private String Avatar;
+    private String avatar;
 
     @OneToMany(mappedBy = "producer", fetch = FetchType.EAGER)
-    private Collection<Producer> producers;
+    private Collection<Track> tracks;
 
     public Producer() {
     }
 
-    public Producer(String last_Name, String first_Name, String middle_Name, String avatar, Collection<Producer> producers) {
-        Last_Name = last_Name;
-        First_Name = first_Name;
-        Middle_Name = middle_Name;
-        Avatar = avatar;
-        this.producers = producers;
+    public Producer(String lastname, String firstname, String middlename, String avatar, Collection<Track> tracks) {
+        this.lastname = lastname;
+        this.firstname = firstname;
+        this.middlename = middlename;
+        this.avatar = avatar;
+        this.tracks = tracks;
     }
 
     public Long getId() {
@@ -44,43 +44,43 @@ public class Producer {
         this.id = id;
     }
 
-    public String getLast_Name() {
-        return Last_Name;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLast_Name(String last_Name) {
-        Last_Name = last_Name;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
-    public String getFirst_Name() {
-        return First_Name;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirst_Name(String first_Name) {
-        First_Name = first_Name;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getMiddle_Name() {
-        return Middle_Name;
+    public String getMiddlename() {
+        return middlename;
     }
 
-    public void setMiddle_Name(String middle_Name) {
-        Middle_Name = middle_Name;
+    public void setMiddlename(String middlename) {
+        this.middlename = middlename;
     }
 
     public String getAvatar() {
-        return Avatar;
+        return avatar;
     }
 
     public void setAvatar(String avatar) {
-        Avatar = avatar;
+        this.avatar = avatar;
     }
 
-    public Collection<Producer> getProducers() {
-        return producers;
+    public Collection<Track> getTracks() {
+        return tracks;
     }
 
-    public void setProducers(Collection<Producer> producers) {
-        this.producers = producers;
+    public void setTracks(Collection<Track> tracks) {
+        this.tracks = tracks;
     }
 }

@@ -15,22 +15,22 @@ public class User {
     private Long id;
     @NotBlank(message = "Поле не должно быть пустым")
     @Size(min = 1, message = "Фамилия должена быть больше 2 символов")
-    private String Last_Name;
+    private String lastname;
     @NotBlank(message = "Поле не должно быть пустым")
     @Size(min = 1, message = "Имя должено быть больше 2 символов")
-    private String First_Name;
-    private String Middle_Name;
+    private String firstname;
+    private String middlename;
     @NotBlank
     @Email
-    private String Email;
+    private String email;
     @NotBlank(message = "Поле не должно быть пустым")
     @Size(min = 5, message = "Имя пользователя должено быть больше 5 символов")
-    private String Username;
+    private String username;
     @NotBlank(message = "Поле не должно быть пустым")
     @Size(min = 8, message = "Пароль должен быть больше 8 символов")
-    private String Password;
+    private String password;
     @NotNull(message = "Выберите файл")
-    private String Avatar;
+    private String avatar;
     private Boolean active;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
@@ -44,14 +44,14 @@ public class User {
     public User() {
     }
 
-    public User(String last_Name, String first_Name, String middle_Name, String email, String username, String password, String avatar, Boolean active, Set<Role> roles, Collection<Playlist> playlists) {
-        Last_Name = last_Name;
-        First_Name = first_Name;
-        Middle_Name = middle_Name;
-        Email = email;
-        Username = username;
-        Password = password;
-        Avatar = avatar;
+    public User(String lastname, String firstname, String middlename, String email, String username, String password, String avatar, Boolean active, Set<Role> roles, Collection<Playlist> playlists) {
+        this.lastname = lastname;
+        this.firstname = firstname;
+        this.middlename = middlename;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.avatar = avatar;
         this.active = active;
         this.roles = roles;
         this.playlists = playlists;
@@ -65,60 +65,60 @@ public class User {
         this.id = id;
     }
 
-    public String getLast_Name() {
-        return Last_Name;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLast_Name(String last_Name) {
-        Last_Name = last_Name;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
-    public String getFirst_Name() {
-        return First_Name;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirst_Name(String first_Name) {
-        First_Name = first_Name;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getMiddle_Name() {
-        return Middle_Name;
+    public String getMiddlename() {
+        return middlename;
     }
 
-    public void setMiddle_Name(String middle_Name) {
-        Middle_Name = middle_Name;
+    public void setMiddlename(String middlename) {
+        this.middlename = middlename;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
     public String getAvatar() {
-        return Avatar;
+        return avatar;
     }
 
     public void setAvatar(String avatar) {
-        Avatar = avatar;
+        this.avatar = avatar;
     }
 
     public Boolean getActive() {

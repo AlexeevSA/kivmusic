@@ -12,7 +12,7 @@ public class Genre {
     private Long id;
     @NotBlank(message = "Поле не должно быть пустым")
     @Size(min = 1, message = "Название должен быть больше 1 символа")
-    private String Genre_Name;
+    private String genrename;
 
     @OneToMany(mappedBy = "genre", fetch = FetchType.EAGER)
     private Collection<Track> tracks;
@@ -20,8 +20,8 @@ public class Genre {
     public Genre() {
     }
 
-    public Genre(String genre_Name, Collection<Track> tracks) {
-        Genre_Name = genre_Name;
+    public Genre(String genrename, Collection<Track> tracks) {
+        this.genrename = genrename;
         this.tracks = tracks;
     }
 
@@ -33,12 +33,12 @@ public class Genre {
         this.id = id;
     }
 
-    public String getGenre_Name() {
-        return Genre_Name;
+    public String getGenrename() {
+        return genrename;
     }
 
-    public void setGenre_Name(String genre_Name) {
-        Genre_Name = genre_Name;
+    public void setGenrename(String genrename) {
+        this.genrename = genrename;
     }
 
     public Collection<Track> getTracks() {

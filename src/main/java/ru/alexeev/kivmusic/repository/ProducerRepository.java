@@ -5,5 +5,5 @@ import ru.alexeev.kivmusic.models.Album;
 import ru.alexeev.kivmusic.models.Producer;
 
 public interface ProducerRepository extends CrudRepository<Producer, Long> {
-    Producer findByLast_Name(String Last_Name);
+    Producer findByLastname(String Last_Name);
 }

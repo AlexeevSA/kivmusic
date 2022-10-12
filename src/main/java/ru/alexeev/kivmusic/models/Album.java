@@ -15,12 +15,12 @@ public class Album {
 
     @NotBlank(message = "Поле не должно быть пустым")
     @Size(min = 1, message = "Название должен быть больше 1 символа")
-    private String Album_Name;
+    private String albumname;
 
-    @NotBlank(message = "Поле не должно быть пустым")
-    private Date Release_Date;
+    @NotNull(message = "Поле не должно быть пустым")
+    private String releasedate;
     @NotNull(message = "Выберите файл")
-    private String Photo;
+    private String photo;
 
     @ManyToMany
     @JoinTable (name="artist_album",
@@ -34,15 +34,16 @@ public class Album {
             inverseJoinColumns=@JoinColumn(name="track_id"))
     private List<Track> tracks;
 
-    public Album(String album_Name, Date release_Date, String photo, List<Artist> artists, List<Track> tracks) {
-        Album_Name = album_Name;
-        Release_Date = release_Date;
-        Photo = photo;
-        this.artists = artists;
-        this.tracks = tracks;
-    }
 
     public Album() {
+    }
+
+    public Album(String albumname, String releasedate, String photo, List<Artist> artists, List<Track> tracks) {
+        this.albumname = albumname;
+        this.releasedate = releasedate;
+        this.photo = photo;
+        this.artists = artists;
+        this.tracks = tracks;
     }
 
     public Long getId() {
@@ -53,28 +54,28 @@ public class Album {
         this.id = id;
     }
 
-    public String getAlbum_Name() {
-        return Album_Name;
+    public String getAlbumname() {
+        return albumname;
     }
 
-    public void setAlbum_Name(String album_Name) {
-        Album_Name = album_Name;
+    public void setAlbumname(String albumname) {
+        this.albumname = albumname;
     }
 
-    public Date getRelease_Date() {
-        return Release_Date;
+    public String getReleasedate() {
+        return releasedate;
     }
 
-    public void setRelease_Date(Date release_Date) {
-        Release_Date = release_Date;
+    public void setReleasedate(String releasedate) {
+        this.releasedate = releasedate;
     }
 
     public String getPhoto() {
-        return Photo;
+        return photo;
     }
 
     public void setPhoto(String photo) {
-        Photo = photo;
+        this.photo = photo;
     }
 
     public List<Artist> getArtists() {

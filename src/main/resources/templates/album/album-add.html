@@ -3,25 +3,36 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Создание альбома</title>
+    <link rel="stylesheet" href="" th:href="@{/css/style.css}" >
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
 <body>
 <div th:insert="fragments/header :: mainheader"></div>
-<form th:object="${album}" th:action="${'/album/add'}" method="post">
-    <input th:field="*{Album_Name}" type="text" name="Album_Name" placeholder="Введите название альбом">
-    <div style="color: red " th:if="${#fields.hasErrors('Album_Name')}" th:errors="*{Album_Name}"></div>
-    <input th:field="*{Release_Date}" type="date" name="Release_Date" placeholder="Введите дату выхода">
-    <div style="color: red " th:if="${#fields.hasErrors('Release_Date')}" th:errors="*{Release_Date}"></div>
-    <input th:field="*{Photo}" type="file" name="Photo" placeholder="Добавить обложку">
-    <div style="color: red " th:if="${#fields.hasErrors('Photo')}" th:errors="*{Photo}"></div>
-    <input th:field="*{artists}" type="text" name="artists" placeholder="Выберите исполнителя">
-    <div style="color: red " th:if="${#fields.hasErrors('artists')}" th:errors="*{artists}"></div>
-    <input th:field="*{tracks}" type="text" name="tracks" placeholder="Выберите произведения">
-    <div style="color: red " th:if="${#fields.hasErrors('tracks')}" th:errors="*{tracks}"></div>
-    <br>
-    <button type="submit" class="btn btn-outline-primary">Добавить</button>
-</form>
-<a href="/" class="btn btn-outline-secondary">Назад</a>
+<div class="div-panel">
+    <h1>Добавление альбома</h1>
+    <form th:object="${album}" th:action="${'/album/add'}" method="post">
+        <p>Введите название альбома</p>
+        <input th:field="*{albumname}" type="text" name="albumname" placeholder="Название альбом">
+        <div style="color: red " th:if="${#fields.hasErrors('albumname')}" th:errors="*{albumname}"></div>
+        <br/>
+        <p>Выберите дату альбома</p>
+        <input th:field="*{releasedate}" type="date" name="releasedate">
+        <div style="color: red " th:if="${#fields.hasErrors('releasedate')}" th:errors="*{releasedate}"></div>
+        <p>Добавьте обложку альбома</p>
+        <input class="form-control" th:field="*{photo}" type="file" name="Photo" placeholder="Добавить обложку">
+        <div style="color: red " th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}"></div>
+        <p>Выберите исполнителя: </p>
+        <select class="form-select" name="artist">
+            <div th:each="el : ${artist}">
+                <option th:text="${el.artistname}" th:value="${el.id}"></option>
+            </div>
+        </select>
+        <div style="color: red " th:if="${#fields.hasErrors('artists')}" th:errors="*{artists}"></div>
+        <br>
+        <button type="submit" class="btn btn-outline-primary mybtn">Добавить</button>
+    </form>
+    <a href="/" class="btn btn-outline-secondary mybtn">Назад</a>
+</div>
 <div th:insert="fragments/footer :: mainfooter"></div>
 </body>
 </html>
